@@ -1,0 +1,15 @@
+user
+    login    Done
+    register Done
+product
+    create   Done
+    read     Done
+    update   Done
+    delete   Done
+    readAll  Done
+
+mocks:
+    Mock test service get one product found         Done
+    Mock test service get one product not found     Done
+    Mock test service get all product found         Done
+    Mock test service get all product not found     Done
