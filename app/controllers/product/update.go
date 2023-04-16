@@ -11,6 +11,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// UpdateProduct godoc
+//	@Summary		Update a Product
+//	@Description	Updating a Product by ProductID
+//	@Tags			Product
+//	@Accept			json
+//	@Produce		json
+//	@Param			productId	path		int				true	"Product ID"
+//	@Param			Product		body		string			true	"Product Fields"	SchemaExample({"title":"Title of the Product","description":"Lorem ipsum dolor sit amet"})
+//	@Success		200			{object}	models.Product	"Product"
+//	@Failure		400
+//	@Failure		401
+//	@Failure		404
+//	@Router			/products/{productId} [put]
+//	@Security		BearerAuth
 func (controller ProductController) UpdateProduct(c *gin.Context) {
 	contentType := helpers.GetContentType(c)
 	Product := models.Product{}

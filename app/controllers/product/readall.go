@@ -9,6 +9,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// ReadAllProduct godoc
+//	@Summary	Read all Products
+//	@Tags		Product
+//	@Produce	json
+//	@Success	200	{array}	models.Product
+//	@Failure	400
+//	@Failure	401
+//	@Failure	404
+//	@Router		/products [get]
+//	@Security	BearerAuth
 func (controller ProductController) ReadAllProduct(c *gin.Context) {
 	contentType := helpers.GetContentType(c)
 

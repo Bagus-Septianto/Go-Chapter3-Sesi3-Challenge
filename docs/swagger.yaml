@@ -1,0 +1,246 @@
+basePath: /
+definitions:
+  models.Product:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userID:
+        type: integer
+    type: object
+  models.User:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      products:
+        items:
+          $ref: '#/definitions/models.Product'
+        type: array
+      role:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: gochallenge@bagusseptianto.com
+    name: Bagus Septianto
+    url: http://bagusseptianto.com/
+  description: DTS FGA KOMINFO Hacktiv8 Golang-6
+  title: Go Challenge
+  version: "1.0"
+paths:
+  /products:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Product'
+            type: array
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - BearerAuth: []
+      summary: Read all Products
+      tags:
+      - Product
+    post:
+      consumes:
+      - application/json
+      description: Creating a Product
+      parameters:
+      - description: Product Fields
+        in: body
+        name: Product
+        required: true
+        schema:
+          example: '{"title":"Title of the Product","description":"Lorem ipsum dolor
+            sit amet"}'
+          type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Product
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - BearerAuth: []
+      summary: Create a Product
+      tags:
+      - Product
+  /products/{productId}:
+    delete:
+      description: Deleting a Product by ProductID
+      parameters:
+      - description: Product ID
+        in: path
+        name: productId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - BearerAuth: []
+      summary: Delete a Product
+      tags:
+      - Product
+    get:
+      consumes:
+      - application/json
+      description: Reading a Product based on ProductID
+      parameters:
+      - description: Product ID
+        in: path
+        name: productId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - BearerAuth: []
+      summary: Read a Product by ID
+      tags:
+      - Product
+    put:
+      consumes:
+      - application/json
+      description: Updating a Product by ProductID
+      parameters:
+      - description: Product ID
+        in: path
+        name: productId
+        required: true
+        type: integer
+      - description: Product Fields
+        in: body
+        name: Product
+        required: true
+        schema:
+          example: '{"title":"Title of the Product","description":"Lorem ipsum dolor
+            sit amet"}'
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Product
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - BearerAuth: []
+      summary: Update a Product
+      tags:
+      - Product
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: Logging in user with username and password
+      parameters:
+      - description: user credential
+        in: body
+        name: UserCredential
+        required: true
+        schema:
+          example: '{"username":"testlagi","password":"12345678"}'
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            type: string
+        "401":
+          description: invaild username/password
+      summary: Login User
+      tags:
+      - User
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: Creating new user
+      parameters:
+      - description: User
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+      summary: Register User
+      tags:
+      - User
+securityDefinitions:
+  BearerAuth:
+    description: Bearer Token. don't forget to add "Bearer " in front of your token
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

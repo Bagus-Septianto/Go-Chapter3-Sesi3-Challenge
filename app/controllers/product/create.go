@@ -10,6 +10,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreateProduct godoc
+//	@Summary		Create a Product
+//	@Description	Creating a Product
+//	@Tags			Product
+//	@Accept			json
+//	@Produce		json
+//	@Param			Product	body		string			true	"Product Fields"	SchemaExample({"title":"Title of the Product","description":"Lorem ipsum dolor sit amet"})
+//	@Success		201		{object}	models.Product	"Product"
+//	@Failure		400
+//	@Failure		401
+//	@Failure		404
+//	@Router			/products [post]
+//	@Security		BearerAuth
 func (controller ProductController) CreateProduct(c *gin.Context) {
 	contentType := helpers.GetContentType(c)
 	Product := models.Product{}

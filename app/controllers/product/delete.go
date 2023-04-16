@@ -11,6 +11,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// DeleteProduct godoc
+//	@Summary		Delete a Product
+//	@Description	Deleting a Product by ProductID
+//	@Tags			Product
+//	@Produce		json
+//	@Param			productId	path	int	true	"Product ID"
+//	@Success		204
+//	@Failure		400
+//	@Failure		401
+//	@Failure		404
+//	@Router			/products/{productId} [delete]
+//	@Security		BearerAuth
 func (controller ProductController) DeleteProduct(c *gin.Context) {
 	userData := c.MustGet("userData").(jwt.MapClaims) // ambil userData dari jwt
 	contentType := helpers.GetContentType(c)

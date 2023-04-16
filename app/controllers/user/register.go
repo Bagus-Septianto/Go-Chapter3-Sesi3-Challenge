@@ -9,35 +9,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// func UserRegister(c *gin.Context) {
-// 	db := database.GetDB()
-// 	contentType := helpers.GetContentType(c)
-// 	_,_ = db, contentType
-// 	User := models.User{}
-
-// 	if contentType == common.AppJSON {
-// 		c.ShouldBindJSON(&User)
-// 	} else {
-// 		c.ShouldBind(&User)
-// 	}
-
-// 	err := db.Debug().Create(&User).Error
-
-// 	if err != nil {
-// 		c.JSON(http.StatusBadRequest, gin.H{
-// 			"error": "Bad Request",
-// 			"message": err.Error(),
-// 		})
-// 		return
-// 	}
-
-// 	c.JSON(http.StatusCreated, gin.H{
-// 		"id": User.ID,
-// 		"username": User.Username,
-// 		"role": User.Role,
-// 	})
-// }
-
+// UserRegister godoc
+//	@Summary		Register User
+//	@Description	Creating new user
+//	@Tags			User
+//	@Accept			json
+//	@Produce		json
+//	@Param			User	body		models.User	true	"User"
+//	@Success		201		{object}	string
+//	@Failure		400
+//	@Router			/users/register [post]
 func (controller UserController) UserRegister(c *gin.Context) {
 	contentType := helpers.GetContentType(c)
 	User := models.User{}

@@ -10,6 +10,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// ReadProduct godoc
+//	@Summary		Read a Product by ID
+//	@Description	Reading a Product based on ProductID
+//	@Tags			Product
+//	@Accept			json
+//	@Produce		json
+//	@Param			productId	path		int	true	"Product ID"
+//	@Success		200			{object}	models.Product
+//	@Failure		400
+//	@Failure		401
+//	@Failure		404
+//	@Router			/products/{productId} [get]
+//	@Security		BearerAuth
 func (controller ProductController) ReadProduct(c *gin.Context) {
 	// Kalau sudah masuk sini. product.UserID yang dicari udah sama dengan UserID yang terautentikasi
 	// query 2x sih jadinya... (1x di middleware.authorization, 1x lagi di repository)

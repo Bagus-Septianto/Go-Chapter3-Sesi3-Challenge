@@ -13,6 +13,22 @@ import (
 
 // https://softwareengineering.stackexchange.com/questions/306890/is-it-bad-practice-that-a-controller-calls-a-repository-instead-of-a-service
 
+
+//	@title			Go Challenge
+//	@version		1.0
+//	@description	DTS FGA KOMINFO Hacktiv8 Golang-6
+
+//	@contact.name	Bagus Septianto
+//	@contact.url	http://bagusseptianto.com/
+//	@contact.email	gochallenge@bagusseptianto.com
+
+//	@host		localhost:8080
+//	@BasePath	/
+
+//	@securityDefinitions.apiKey	BearerAuth
+//	@in							header
+//	@name						Authorization
+//	@description				Bearer Token. don't forget to add "Bearer " in front of your token
 func main() {
 	db, err := database.StartDB()
 	if err != nil {
@@ -27,5 +43,5 @@ func main() {
 	productController := productCont.NewProductController(productService, db)
 
 	r := router.StartApp(userController, productController)
-	r.Run(":8080")
+	r.Run("localhost:8080")
 }
